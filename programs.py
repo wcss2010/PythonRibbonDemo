@@ -20,6 +20,6 @@ class Program:
     '''
     def main(args):
         #创建窗体        
-        mainForm = EventMainWindowImpl.buildWindowM(None,EventMainWindowImpl())
+        windowThread,uiDefine,eventObj = EventMainWindowImpl.buildWindowM(None,EventMainWindowImpl())
         #窗体显示
-        mainForm.show()
+        windowThread.show()

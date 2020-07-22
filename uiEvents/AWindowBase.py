@@ -52,7 +52,7 @@ class IWindowEvents(object):
             #初始化窗体事件类
             event.initWindow(cfenv.appObj,windowThread,uiDefine)
             #返回对象
-            return windowThread,ui,event
+            return windowThread,uiDefine,event
         else:
             return None,None,None
 
@@ -70,7 +70,7 @@ class IWindowEvents(object):
             #初始化窗体事件类
             event.initWindow(cfenv.appObj,windowThread,uiDefine)
             #返回对象
-            return windowThread,ui,event
+            return windowThread,uiDefine,event
         else:
             return None,None,None
 
@@ -88,6 +88,6 @@ class IWindowEvents(object):
             #初始化窗体事件类
             event.initWindow(cfenv.appObj,windowThread,uiDefine)
             #返回对象
-            return windowThread,ui,event
+            return windowThread,uiDefine,event
         else:
             return None,None,None
