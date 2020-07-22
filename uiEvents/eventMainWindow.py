@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtNetwork import *
+from uiEvents.eventWindowBase import *
 import os
 import sys
 import pathlib
@@ -10,7 +11,7 @@ import pathlib
 '''
     这是MainWindow窗体的事件实现类
 '''
-class EventMainWindowImpl(object):
+class EventMainWindowImpl(IEventWindow):
     '''
         窗体载入
     '''

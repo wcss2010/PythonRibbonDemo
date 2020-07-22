@@ -26,8 +26,12 @@ class Program:
         app = QApplication(args)
         #创建窗体线程
         MainWindow = QMainWindow()
-        #创建窗体描述类
+        #创建窗体描述类(类似于C#中的form.designer.cs)
         ui = Ui_MainWindow()
+        #创建窗体事件类(类似于C#中的form.cs)
+        uiEvent = EventMainWindowImpl()
+        #初始化窗体事件类
+        uiEvent.initWindow(MainWindow,ui)
         #设置描述类到窗体线程
         ui.setupUi(MainWindow)
         #窗体显示(阻塞)
