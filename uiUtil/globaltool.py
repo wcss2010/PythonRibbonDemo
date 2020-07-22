@@ -201,7 +201,9 @@ class codemaker(object):
 '''
 class iotool(object):
     '''
-      运行指令并等待返回结果
+      运行指令并等待返回结果（会阻塞直到完成）
+      输入参数：命令行字符串，返回内容编码
+      返回参数: 文本内容+错误信息，文本内容，错误信息
     '''
     def start(cmdStr,responseCoding):
        print('start command:' + cmdStr)
