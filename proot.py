@@ -4,12 +4,9 @@
 #
 import sys
 
-from PyQt5.QtWidgets import QApplication, QMainWindow
-from PyQt5.uic.properties import QtGui
+from PyQt5.QtWidgets import QApplication
 from uiUtil.globaltool import *
 from uiUtil.envs import *
-from uiDefines import *
-from uiEvents import *
 from programs import *
 
 #***************下面这段是启动代码，绝对不能删除！！！也不建议修改***************
