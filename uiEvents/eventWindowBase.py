@@ -34,5 +34,15 @@ class IEventWindow(object):
     '''
         创建窗体线程并进行配置
     '''
-    def buildWindow(appObj,uiObj,eventObj):
-        pass
+    def buildWindow(app,parent,ui,event):
+        if app != None and ui != None and event != None:
+            #创建窗体线程
+            windowThread = QMainWindow(parent)
+            #初始化窗体事件类
+            event.initWindow(app,windowThread,ui)
+            #设置描述类到窗体线程
+            ui.setupUi(windowThread)
+            #返回对象
+            return windowThread,ui,event
+        else:
+            return None,None,None
