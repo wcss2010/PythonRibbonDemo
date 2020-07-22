@@ -1,1 +1,1 @@
-# PythonQTApplicationTemplete
+这是自用的一个基于Python+PYQT的界面应该程序的模板，为方便于日后开发类似程序方便，所以特此整理，以后会不断的迭代的，有需要的可以拿去！开发环境为 VSCode+Python+PYQT Integration
