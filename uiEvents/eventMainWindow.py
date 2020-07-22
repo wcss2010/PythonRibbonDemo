@@ -11,7 +11,19 @@ import pathlib
 '''
     这是MainWindow窗体的事件实现类
 '''
-class EventMainWindowImpl(IEventWindow):
+class EventMainWindowImpl(IWindowEvents):
+    '''
+       初始化所有数据(抽象函数)
+    '''
+    def initUIAndData(self):
+        pass
+
+    '''
+       返回UI定义类的实例(例如uiDefines/Ui_MainWindow.py的实例,抽象函数)
+    '''
+    def getUIDefineObject(self):
+        pass
+
     '''
         窗体载入
     '''
