@@ -47,10 +47,10 @@ class IWindowEvents(object):
         if cfenv.appObj != None and uiDefine != None and event != None:
             #创建窗体线程
             windowThread = QMainWindow(parent)
-            #初始化窗体事件类
-            event.initWindow(cfenv.appObj,windowThread,uiDefine)
             #设置描述类到窗体线程
             uiDefine.setupUi(windowThread)
+            #初始化窗体事件类
+            event.initWindow(cfenv.appObj,windowThread,uiDefine)
             #返回对象
             return windowThread,ui,event
         else:
@@ -65,10 +65,10 @@ class IWindowEvents(object):
         if cfenv.appObj != None and uiDefine != None and event != None:
             #创建窗体线程
             windowThread = QWidget(parent)
-            #初始化窗体事件类
-            event.initWindow(cfenv.appObj,windowThread,uiDefine)
             #设置描述类到窗体线程
             uiDefine.setupUi(windowThread)
+            #初始化窗体事件类
+            event.initWindow(cfenv.appObj,windowThread,uiDefine)
             #返回对象
             return windowThread,ui,event
         else:
@@ -83,10 +83,10 @@ class IWindowEvents(object):
         if cfenv.appObj != None and uiDefine != None and event != None:
             #创建窗体线程
             windowThread = QDialog(parent)
-            #初始化窗体事件类
-            event.initWindow(cfenv.appObj,windowThread,uiDefine)
             #设置描述类到窗体线程
             uiDefine.setupUi(windowThread)
+            #初始化窗体事件类
+            event.initWindow(cfenv.appObj,windowThread,uiDefine)
             #返回对象
             return windowThread,ui,event
         else:
