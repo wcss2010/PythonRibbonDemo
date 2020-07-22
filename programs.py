@@ -8,7 +8,6 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.uic.properties import QtGui
 from uiUtil.globaltool import *
 from uiUtil.envs import *
-from uiDefines import *
 from uiEvents.eventMainWindow import *
 from uiEvents.AWindowBase import *
 
@@ -27,7 +26,13 @@ class Program:
         print("Script:" + cfenv.scriptDir)
         print("ConfigFile:" + cfenv.configFilePath)
 
+        #创建QT的Application对象,每一个pyqt程序中都需要有一个QApplication对象(不可删除!!!!!!!!!)
+        cfenv.appObj = QApplication(args)
+
         #创建窗体
-        windowThread,uiDefine,eventObj = IWindowEvents.buildWindowM(None,EventMainWindowImpl())
+        mainWindow,uiDefine,eventObj = IWindowEvents.buildWindowM(None,EventMainWindowImpl())
         #窗体显示
-        windowThread.show()
+        mainWindow.show()
+
+        #进入程序的主循环，遇到退出情况，终止程序(不可删除!!!!!!!!!)
+        sys.exit(cfenv.appObj.exec_())
