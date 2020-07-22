@@ -19,11 +19,7 @@ class Program:
         启动函数，类似于C#中的Program.Main(命令行参数)
     '''
     def main(args):
-        #创建目录以及载入配置
-        cfenv.initEnvData()        
         #启动程序
-        #创建QT的Application对象
-        app = QApplication(args)        
         #创建窗体线程
         MainWindow = QMainWindow()
         #创建窗体描述类(类似于C#中的form.designer.cs)
@@ -37,14 +33,35 @@ class Program:
         #窗体显示(阻塞)
         MainWindow.show()
 
-        #退出程序
-        sys.exit(app.exec_())
+        
 
 
 
 
 
-#下面这段是启动代码，绝对不能删除！！！
-if __name__ == '__main__':
-    #调用Program类中的main函数，启动程序
-    Program.main(sys.argv)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
