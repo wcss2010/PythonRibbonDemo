@@ -7,7 +7,7 @@ uiUtil一些常用函数,其中的cfenv是环境变量,负责初始化配置文�
 目录结构如下： <br>
 bin (用于存放主程序) <br>
 data (用于存放数据)<br>
-plugins (用于存放插件数据) <br>
-scripts (用于存放脚本数据) <br>
+&nbsp;&nbsp;plugins (用于存放插件数据) <br>
+&nbsp;&nbsp;scripts (用于存放脚本数据) <br>
 config.json (用于存放配置数据) <br>
 config.json.backup (用于存放配置数据的备份，当config.json解析失败时恢复用！)<br>
