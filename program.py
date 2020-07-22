@@ -23,7 +23,7 @@ class Program:
         cfenv.initEnvData()        
         #启动程序
         #创建QT的Application对象
-        app = QApplication(args)
+        app = QApplication(args)        
         #创建窗体线程
         MainWindow = QMainWindow()
         #创建窗体描述类(类似于C#中的form.designer.cs)
@@ -36,6 +36,7 @@ class Program:
         ui.setupUi(MainWindow)
         #窗体显示(阻塞)
         MainWindow.show()
+
         #退出程序
         sys.exit(app.exec_())
 
