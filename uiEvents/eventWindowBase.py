@@ -14,12 +14,14 @@ class IEventWindow(object):
     '''
         窗体初始化
     '''
-    def initWindow(self,mainWindowThread,mainUIDefine):
+    def initWindow(self,appObj,mainWindowThread,mainUIDefine):
         #保存引用
+        #Application对象
+        self.applicationObj = appObj
         #主窗体线程
-        self.mainWindowThread = mainWindowThread
+        self.mainWindowObj = mainWindowThread
         #窗体定义类
-        self.mainUI = mainUIDefine
+        self.mainUIDefineObj = mainUIDefine
         #初始化所有数据
         self.initUIAndData()
 
@@ -27,4 +29,10 @@ class IEventWindow(object):
        初始化所有数据(抽象函数)
     '''
     def initUIAndData(self):
+        pass
+
+    '''
+        创建窗体线程并进行配置
+    '''
+    def buildWindow(appObj,uiObj,eventObj):
         pass
