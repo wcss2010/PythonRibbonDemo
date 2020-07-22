@@ -1,6 +1,6 @@
 #-*- coding:utf-8 -*-
 #
-#  程序入口文件
+#  程序启动类
 #
 import sys
 
@@ -9,7 +9,7 @@ from PyQt5.uic.properties import QtGui
 from uiUtil.globaltool import *
 from uiUtil.envs import *
 from uiDefines import *
-from uiEvents import *
+from uiEvents.eventMainWindow import *
 
 '''
     启动类
@@ -19,49 +19,7 @@ class Program:
         启动函数，类似于C#中的Program.Main(命令行参数)
     '''
     def main(args):
-        #启动程序
-        #创建窗体线程
-        MainWindow = QMainWindow()
-        #创建窗体描述类(类似于C#中的form.designer.cs)
-        ui = Ui_MainWindow()
-        #创建窗体事件类(类似于C#中的form.cs)
-        uiEvent = EventMainWindowImpl()
-        #初始化窗体事件类
-        uiEvent.initWindow(MainWindow,ui)
-        #设置描述类到窗体线程
-        ui.setupUi(MainWindow)
-        #窗体显示(阻塞)
-        MainWindow.show()
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        #创建窗体        
+        mainForm = EventMainWindowImpl.buildWindowM(None,EventMainWindowImpl())
+        #窗体显示
+        mainForm.show()

@@ -7,6 +7,7 @@ import base64
 import subprocess
 import shutil
 import io
+from uiUtil.globaltool import *
 
 '''
    环境变量
