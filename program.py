@@ -8,6 +8,8 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.uic.properties import QtGui
 from uiUtil.globaltool import *
 from uiUtil.envs import *
+from uiDefines import *
+from uiEvents import *
 
 '''
     启动类
@@ -20,11 +22,17 @@ class Program:
         #创建目录以及载入配置
         cfenv.initEnvData()        
         #启动程序
+        #创建QT的Application对象
         app = QApplication(args)
+        #创建窗体线程
         MainWindow = QMainWindow()
-        ui = UI描述类()
+        #创建窗体描述类
+        ui = Ui_MainWindow()
+        #设置描述类到窗体线程
         ui.setupUi(MainWindow)
+        #窗体显示(阻塞)
         MainWindow.show()
+        #退出程序
         sys.exit(app.exec_())
 
 
