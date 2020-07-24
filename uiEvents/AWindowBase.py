@@ -45,7 +45,7 @@ class IWindowImpl:
 '''
     基于QMainWindow的窗体的实现类接口
 '''
-class IWIndowImplM(IWindowImpl,QMainWindow):
+class IWindowImplM(IWindowImpl,QMainWindow):
     pass
 
 '''

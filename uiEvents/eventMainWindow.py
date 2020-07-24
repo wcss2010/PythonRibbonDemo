@@ -12,7 +12,8 @@ import pathlib
 '''
     这是MainWindow窗体的实现类
 '''
-class EventMainWindowImpl(IWindowImpl):
+#class EventMainWindowImpl(IWindowImpl):
+class EventMainWindowImpl(IWindowImplM):
     '''
        初始化所有数据(抽象函数)
     '''
