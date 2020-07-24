@@ -10,9 +10,10 @@ import sys
 import pathlib
 
 '''
-    这是MainWindow窗体的事件实现类
+    这是MainWindow窗体的实现类
 '''
-class EventMainWindowImpl(IWindowEvents):
+#class EventMainWindowImpl(IWindowImpl):
+class EventMainWindowImpl(IWindowImplM):
     '''
        初始化所有数据(抽象函数)
     '''
@@ -23,9 +24,9 @@ class EventMainWindowImpl(IWindowEvents):
         初始化事件
     '''
     def initEvents(self):
-        self.mainUIDefineObj.btnTestA.clicked.connect(self.btnTestAClicked)
-        self.mainUIDefineObj.btnTestB.clicked.connect(self.btnTestBClicked)
-        self.mainUIDefineObj.btnTestC.clicked.connect(self.btnTestCClicked)
+        self.uiObj.btnTestA.clicked.connect(self.btnTestAClicked)
+        self.uiObj.btnTestB.clicked.connect(self.btnTestBClicked)
+        self.uiObj.btnTestC.clicked.connect(self.btnTestCClicked)
 
     '''
        返回UI定义类的实例(例如uiDefines/Ui_MainWindow.py的实例,抽象函数)
@@ -37,16 +38,16 @@ class EventMainWindowImpl(IWindowEvents):
         按钮A
     '''
     def btnTestAClicked(self,e):
-        self.mainUIDefineObj.txtContent.setText('aaaaaaaaaaaaa')
+        self.uiObj.txtContent.setText('aaaaaaaaaaaaa')
 
     '''
         按钮B
     '''
     def btnTestBClicked(self,e):
-        self.mainUIDefineObj.txtContent.setText('bbbbbbbbbbbbb')
+        self.uiObj.txtContent.setText('bbbbbbbbbbbbb')
 
     '''
         按钮C
     '''
     def btnTestCClicked(self,e):
-        self.mainUIDefineObj.txtContent.setText('ccccccccccccc')
+        self.uiObj.txtContent.setText('ccccccccccccc')
