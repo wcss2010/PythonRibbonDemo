@@ -9,20 +9,24 @@ import sys
 import pathlib
 
 '''
-    这是窗体的事件抽象类(类似于C#中的form.cs类,而uiDefines中的Ui_MainWindow.py则类似于form.designer.cs)
+    这是窗体的实现类接口
+    PyQT中一个窗体的结构如下：
+       QMainWindow = C#下的Form
+            uiDefines中的ui_MainWidow.py=C#下的xxForm.designer.cs
+            uiEvents中eventMainWindow.py=C#下的xxForm.cs
 '''
-class IWindowEvents(object):
+class IWindowImpl:
     '''
         窗体初始化
     '''
-    def initWindow(self,appObj,mainWindowThread,mainUIDefine):
+    def initWindow(self,appObj,windowObj,uiObj):
         #保存引用
         #Application对象
-        self.applicationObj = appObj
+        self.appObj = appObj
         #主窗体线程
-        self.mainWindowObj = mainWindowThread
+        self.windowObj = windowObj
         #窗体定义类
-        self.mainUIDefineObj = mainUIDefine
+        self.uiObj = uiObj
         #初始化所有数据
         self.initUIAndData()
 
@@ -38,56 +42,53 @@ class IWindowEvents(object):
     def getUIDefineObject(self):
         raise NotImplementedError
 
-    '''
-        创建窗体线程并进行配置(基于QMainWindow)
-        输出参数：QMainWindow,窗体UI定义类,窗体事件抽象类
-    '''
-    def buildWindowM(parent,event):
-        uiDefine = event.getUIDefineObject()
-        if cfenv.appObj != None and uiDefine != None and event != None:
-            #创建窗体线程
-            windowThread = QMainWindow(parent)
-            #设置描述类到窗体线程
-            uiDefine.setupUi(windowThread)
-            #初始化窗体事件类
-            event.initWindow(cfenv.appObj,windowThread,uiDefine)
-            #返回对象
-            return windowThread,uiDefine,event
-        else:
-            return None,None,None
+'''
+    基于QMainWindow的窗体的实现类接口
+'''
+class IWIndowImplM(IWindowImpl,QMainWindow):
+    pass
 
-    '''
-        创建窗体线程并进行配置(基于QWidget)
-        输出参数：QWidget,窗体UI定义类,窗体事件抽象类
-    '''
-    def buildWindowW(parent,event):
-        uiDefine = event.getUIDefineObject()
-        if cfenv.appObj != None and uiDefine != None and event != None:
-            #创建窗体线程
-            windowThread = QWidget(parent)
-            #设置描述类到窗体线程
-            uiDefine.setupUi(windowThread)
-            #初始化窗体事件类
-            event.initWindow(cfenv.appObj,windowThread,uiDefine)
-            #返回对象
-            return windowThread,uiDefine,event
-        else:
-            return None,None,None
+'''
+    基于QWidget的窗体的实现类接口
+'''
+class IWindowImplW(IWindowImpl,QWidget):
+    pass
 
+'''
+    基于QDialog的窗体的实现类接口
+'''
+class IWindowImplD(IWindowImpl,QDialog):
+    pass
+
+'''
+    窗体对象生成器(通过QMainWindow或QWidget或QDialog,结合uiDefines和uiEvent配置窗体对象)
+'''
+class WindowBuilder:
     '''
-        创建窗体线程并进行配置(基于QDialog)
-        输出参数：QDialog,窗体UI定义类,窗体事件抽象类
+        创建窗体对象
+        windowObj = QMainWindow或QWidget或QDialog的实例,如果为空则使用eventImpl的值充当窗体对象
+        eventImpl = 窗体实现类的实例
+        输出参数：QMainWindow或QWidget或QDialog的实例,窗体UI定义类的实例,窗体实现类的实例
     '''
-    def buildWindowD(parent,event):
-        uiDefine = event.getUIDefineObject()
-        if cfenv.appObj != None and uiDefine != None and event != None:
-            #创建窗体线程
-            windowThread = QDialog(parent)
-            #设置描述类到窗体线程
-            uiDefine.setupUi(windowThread)
-            #初始化窗体事件类
-            event.initWindow(cfenv.appObj,windowThread,uiDefine)
-            #返回对象
-            return windowThread,uiDefine,event
+    def buildWindow(windowObj,eventImpl):
+        if eventImp != None:
+            uiDefine = eventImpl.getUIDefineObject()
+            if cfenv.appObj != None and uiDefine != None and eventImpl != None:
+                #设置描述类到窗体线程
+                if windowObj != None:
+                    uiDefine.setupUi(windowObj)
+                else:
+                    uiDefine.setupUi(eventImpl)
+                #初始化窗体事件类
+                if windowObj != None:
+                    eventImpl.initWindow(cfenv.appObj,windowObj,uiDefine)
+                    #返回对象
+                    return windowObj,uiDefine,eventImpl
+                else:
+                    eventImpl.initWindow(cfenv.appObj,eventImpl,uiDefine)
+                    #返回对象
+                    return eventImpl,uiDefine,eventImpl
+            else:
+                return None,None,None
         else:
-            return None,None,None
+                return None,None,None
