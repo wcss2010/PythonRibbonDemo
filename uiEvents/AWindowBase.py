@@ -71,7 +71,7 @@ class WindowBuilder:
         输出参数：QMainWindow或QWidget或QDialog的实例,窗体UI定义类的实例,窗体实现类的实例
     '''
     def buildWindow(windowObj,eventImpl):
-        if eventImp != None:
+        if eventImpl != None:
             uiDefine = eventImpl.getUIDefineObject()
             if cfenv.appObj != None and uiDefine != None and eventImpl != None:
                 #设置描述类到窗体线程

@@ -30,7 +30,7 @@ class Program:
         cfenv.appObj = QApplication(args)
 
         #创建窗体
-        mainWindow,uiDefine,eventObj = IWindowEvents.buildWindowM(None,EventMainWindowImpl())
+        mainWindow,uiDefine,eventObj = WindowBuilder.buildWindow(QMainWindow(),EventMainWindowImpl())
         #窗体显示
         mainWindow.show()
 
