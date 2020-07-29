@@ -1,5 +1,5 @@
 #-*- coding:utf-8 -*-
-import queue
+from multiprocessing import Manager
 import threading
 from concurrent.futures import ThreadPoolExecutor
 import urllib.request
@@ -62,7 +62,7 @@ class DownloadWorker(threading.Thread):
     def __init__(self):
         super().__init__()
         #生成一个队列对象
-        self.queue = queue.Queue()
+        self.queue = Manager().Queue()
         #设置线程守护
         self.setDaemon(True)
         #设置运行标记

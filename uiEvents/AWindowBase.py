@@ -9,7 +9,7 @@ import sys
 import pathlib
 import time
 import threading
-import queue
+from multiprocessing import Manager
 
 '''
     这是窗体的实现类接口
@@ -151,7 +151,7 @@ class QTUIInvokeMsgQueueWorker(threading.Thread):
     def __init__(self, windowObj):
         super().__init__()
         #生成一个队列对象
-        self.queue = queue.Queue()
+        self.queue = Manager().Queue()
         #设置线程守护
         self.setDaemon(True)
         #设置运行标记
