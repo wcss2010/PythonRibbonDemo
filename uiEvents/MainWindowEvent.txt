@@ -20,7 +20,7 @@ class EventMainWindowImpl(IWindowImplM):
     '''
     def initUIAndData(self):
         self.initEvents()
-        self.msgWorker = QTUIInvokeMsgQueueWorker(self)
+        self.msgWorker = QTInvokeQueueWorker(self)
         self.msgWorker.start()
 
     '''

@@ -10,6 +10,7 @@ import pathlib
 import time
 import threading
 from multiprocessing import Manager
+import queue
 
 '''
     这是窗体的实现类接口
@@ -145,13 +146,61 @@ class QTUIInvokerThread(QThread):
             print(exx)
 
 '''
-    用Queue实现的Invoke消息队列
+    用Queue实现的Invoke消息队列(使用Manager.Queue()以支持进程间数据)
 '''
-class QTUIInvokeMsgQueueWorker(threading.Thread):
+class QTInvokeQueueWorkerWithProcess(threading.Thread):
     def __init__(self, windowObj):
         super().__init__()
         #生成一个队列对象
         self.queue = Manager().Queue()
+        #设置线程守护
+        self.setDaemon(True)
+        #设置运行标记
+        self.isRunning = True
+        #设置窗体对象
+        self.windowObj = windowObj
+    
+    '''
+        添加入队(同步方法)
+    '''
+    def addMsg(self, task):
+        self.queue.put(task)
+
+    '''
+        对象出队(同步方法)
+    '''
+    def __getMsg(self):
+        return self.queue.get(True, 2)
+
+    '''
+        线程方法体
+    '''
+    def run(self):
+        print('QTUIInvokeMsgQueueWorker-Start!')
+        while self.isRunning==True:
+            task = None
+            try:
+                #取下载任务
+                task = self.__getMsg()
+            except Exception as exx:
+                pass
+            try:
+                if (task != None and self.windowObj != None):
+                    self.windowObj.invokeUI(task)
+                #睡一会
+                time.sleep(0.2)
+            except Exception as ex:
+                print('QTUIInvokeMsgQueueWorker:' + str(ex))
+        print('QTUIInvokeMsgQueueWorker-End!')
+
+'''
+    用Queue实现的Invoke消息队列
+'''
+class QTInvokeQueueWorker(threading.Thread):
+    def __init__(self, windowObj):
+        super().__init__()
+        #生成一个队列对象
+        self.queue = queue.Queue()
         #设置线程守护
         self.setDaemon(True)
         #设置运行标记
