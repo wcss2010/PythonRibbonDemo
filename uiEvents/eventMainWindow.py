@@ -8,6 +8,7 @@ from uiDefines.Ui_MainWindow import *
 import os
 import sys
 import pathlib
+import datetime
 
 '''
     这是MainWindow窗体的实现类
@@ -19,6 +20,8 @@ class EventMainWindowImpl(IWindowImplM):
     '''
     def initUIAndData(self):
         self.initEvents()
+        self.msgWorker = QTUIInvokeMsgQueueWorker(self)
+        self.msgWorker.start()
 
     '''
         初始化事件
@@ -56,7 +59,7 @@ class EventMainWindowImpl(IWindowImplM):
         按钮C
     '''
     def btnTestCClicked(self, e):
-        self.invokeUI(TestArgs("ccccccccccccccccccc"))
+        self.msgWorker.addMsg(TestArgs(datetime.datetime.now().__str__()))
 
 class TestArgs(QTInvokeArgs):
     def __init__(self, txt):
