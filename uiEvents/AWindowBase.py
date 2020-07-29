@@ -117,6 +117,14 @@ class QTInvokeArgs:
     pass
 
 '''
+    Invoke参数类(只有一个Content)
+'''
+class QTObjectInvokeArgs(QTInvokeArgs):
+    def __init__(self, tag):
+        super().__init__()
+        self.content = tag
+
+'''
     QT的UI线程，用于模仿C#中的Form.Invoke的功能(用于跨线程操作UI内容)
 '''
 class QTUIInvokerThread(QThread):

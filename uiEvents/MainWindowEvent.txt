@@ -41,27 +41,22 @@ class EventMainWindowImpl(IWindowImplM):
         InvokeUI的实现(用于跨线程操作UI内容)
     '''
     def runUIImpl(self, uiArgs):
-        self.uiObj.txtContent.setText(uiArgs.txt)
+        self.uiObj.txtContent.setText(uiArgs.content)
 
     '''
         按钮A
     '''
     def btnTestAClicked(self, e):
-        self.invokeUI(TestArgs("aaaaaaaaaaaaaaaa"))
+        self.invokeUI(QTObjectInvokeArgs("aaaaaaaaaaaaaaaa"))
 
     '''
         按钮B
     '''
     def btnTestBClicked(self, e):
-        self.invokeUI(TestArgs("bbbbbbbbbbbbbbb"))
+        self.invokeUI(QTObjectInvokeArgs("bbbbbbbbbbbbbbb"))
 
     '''
         按钮C
     '''
     def btnTestCClicked(self, e):
-        self.msgWorker.addMsg(TestArgs(datetime.datetime.now().__str__()))
-
-class TestArgs(QTInvokeArgs):
-    def __init__(self, txt):
-        super().__init__()
-        self.txt = txt
+        self.msgWorker.addMsg(QTObjectInvokeArgs(datetime.datetime.now().__str__()))
