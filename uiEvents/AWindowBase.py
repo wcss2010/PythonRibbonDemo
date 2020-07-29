@@ -19,7 +19,7 @@ class IWindowImpl:
     '''
         窗体初始化
     '''
-    def initWindow(self,appObj,windowObj,uiObj):
+    def initWindow(self, appObj, windowObj, uiObj):
         #保存引用
         #Application对象
         self.appObj = appObj
@@ -42,22 +42,36 @@ class IWindowImpl:
     def getUIDefineObject(self):
         raise NotImplementedError
 
+    '''
+        模仿C#中的Form.Invoke(用于跨线程操作UI内容)
+    '''
+    def invokeUI(self, uiArgs):
+        self.invokeThread = QTUIInvokerThread(uiArgs)
+        self.invokeThread.signal.connect(self.runUIImpl)
+        self.invokeThread.start()
+
+    '''
+        InvokeUI的实现(用于跨线程操作UI内容)
+    '''
+    def runUIImpl(self, uiArgs):
+        raise NotImplementedError
+
 '''
     基于QMainWindow的窗体的实现类接口
 '''
-class IWindowImplM(IWindowImpl,QMainWindow):
+class IWindowImplM(IWindowImpl, QMainWindow):
     pass
 
 '''
     基于QWidget的窗体的实现类接口
 '''
-class IWindowImplW(IWindowImpl,QWidget):
+class IWindowImplW(IWindowImpl, QWidget):
     pass
 
 '''
     基于QDialog的窗体的实现类接口
 '''
-class IWindowImplD(IWindowImpl,QDialog):
+class IWindowImplD(IWindowImpl, QDialog):
     pass
 
 '''
@@ -70,7 +84,7 @@ class WindowBuilder:
         eventImpl = 窗体实现类的实例
         输出参数：QMainWindow或QWidget或QDialog的实例,窗体UI定义类的实例,窗体实现类的实例
     '''
-    def buildWindow(windowObj,eventImpl):
+    def buildWindow(windowObj, eventImpl):
         if eventImpl != None:
             uiDefine = eventImpl.getUIDefineObject()
             if cfenv.appObj != None and uiDefine != None and eventImpl != None:
@@ -92,3 +106,26 @@ class WindowBuilder:
                 return None,None,None
         else:
                 return None,None,None
+
+'''
+    Invoke参数类
+'''
+class QTInvokeArgs:
+    pass
+
+'''
+    QT的UI线程，用于模仿C#中的Form.Invoke的功能(用于跨线程操作UI内容)
+'''
+class QTUIInvokerThread(QThread):
+    signal = pyqtSignal(QTInvokeArgs)    # 括号里填写信号传递的参数
+
+    def __init__(self, uiArgs):
+        super().__init__()
+        self.uiArgs = uiArgs
+
+    def __del__(self):
+        self.wait()
+
+    def run(self):
+        # 进行任务操作
+        self.signal.emit(self.uiArgs)    # 发射信号
