@@ -13,8 +13,8 @@ import datetime
 '''
     这是MainWindow窗体的实现类
 '''
-#class EventMainWindowImpl(IWindowImpl):
-class EventMainWindowImpl(IWindowImplM):
+#class FMainWindow(IWindowImpl):
+class FMainWindow(IWindowImplM):
     '''
        初始化所有数据(抽象函数)
     '''
