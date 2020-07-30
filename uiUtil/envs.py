@@ -73,14 +73,21 @@ class cfenv(object):
     '''
     def initConfig():
         if pathlib.Path(cfenv.backupConfigFilePath).exists():
-            shutil.copyfile(cfenv.backupConfigFilePath,cfenv.configFilePath)
+            shutil.copyfile(cfenv.backupConfigFilePath, cfenv.configFilePath)
         else:
             cfenv.writeNewConfig()
+    
+    '''
+        保存配置
+    '''
+    def saveConfig():
+        iotool.writeAllText(cfenv.configFilePath, json.dumps(cfenv.configObj, indent=4))
+
     '''
         输出标准配置文件
     '''
     def writeNewConfig():
         #初始化的例子
         cfenv.configObj['downloadDir'] = '~/PDownloaderDir'
-        #写入数据
-        iotool.writeAllText(cfenv.configFilePath,json.dumps(cfenv.configObj,indent=4))
+        #保存配置
+        cfenv.saveConfig()
