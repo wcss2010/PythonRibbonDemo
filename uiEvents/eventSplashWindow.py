@@ -4,7 +4,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtNetwork import *
 from uiEvents.AWindowBase import *
-from uiDefines.Ui_MainWindow import *
+from uiDefines.Ui_SplashWindow import *
 from uiUtil.envs import *
 from uiUtil.globaltool import *
 import os
@@ -13,10 +13,10 @@ import pathlib
 import datetime
 
 '''
-    这是MainWindow窗体的实现类
+    这是SplashWindow窗体的实现类
 '''
-#class FMainWindow(IWindowImpl):
-class FMainWindow(IWindowImplM):
+#class FSplashWindow(IWindowImpl):
+class FSplashWindow(IWindowImplM):
     '''
        初始化所有数据(抽象函数)
     '''
@@ -52,7 +52,8 @@ class FMainWindow(IWindowImplM):
     def showWindow(title, doWorkImpl):
         if doWorkImpl != None and title != None:
             #显示窗体
-            windowObj, ui, event = WindowBuilder.buildWindow(None, FMainWindow())
+            windowObj, ui, event = WindowBuilder.buildWindow(None, FSplashWindow())
+            windowObj.setWindowTitle(title)
             doWorkImpl.windowObj = windowObj
             doWorkImpl.eventObj = event
             windowObj.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
@@ -69,8 +70,8 @@ class ISplashDoWork:
     '''
         处理数据
     '''
-    def process():
-        pass
+    def process(self):
+        raise NotImplementedError
 
 '''
     Splash的Invoke参数

@@ -5,6 +5,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtNetwork import *
 from uiEvents.AWindowBase import *
 from uiDefines.Ui_MainWindow import *
+from uiEvents.eventSplashWindow import *
 import os
 import sys
 import pathlib
@@ -47,7 +48,8 @@ class FMainWindow(IWindowImplM):
         按钮A
     '''
     def btnTestAClicked(self, e):
-        self.invokeUI(QTObjectInvokeArgs("aaaaaaaaaaaaaaaa"))
+        #显示SplashWindow窗体,SplashProcess为实现类
+        FSplashWindow.showWindow('aaaaa', SplashProcess())
 
     '''
         按钮B
@@ -60,3 +62,26 @@ class FMainWindow(IWindowImplM):
     '''
     def btnTestCClicked(self, e):
         self.msgWorker.addMsg(QTObjectInvokeArgs(datetime.datetime.now().__str__()))
+
+'''
+    SplashProcess为SplashWindow显示控制类
+'''
+class SplashProcess(ISplashDoWork):
+    def process(self):
+        #显示进度为10,内容为111111111111111111111111
+        self.eventObj.msgWorker.addMsg(SplashInvokeArgs(10, '111111111111111111111111'))
+        time.sleep(1)
+        #显示进度为30,内容为222222222222222222222222
+        self.eventObj.msgWorker.addMsg(SplashInvokeArgs(30, '222222222222222222222222'))
+        time.sleep(1)
+        #显示进度为60,内容为333333333333333333333333
+        self.eventObj.msgWorker.addMsg(SplashInvokeArgs(60, '333333333333333333333333'))
+        time.sleep(1)
+        #显示进度为80,内容为444444444444444444444444
+        self.eventObj.msgWorker.addMsg(SplashInvokeArgs(80, '444444444444444444444444'))
+        time.sleep(1)
+        #显示进度为100,内容为555555555555555555555555
+        self.eventObj.msgWorker.addMsg(SplashInvokeArgs(100, '555555555555555555555555'))
+        time.sleep(1)
+        #关闭窗体
+        self.windowObj.close()
