@@ -134,6 +134,27 @@ class spidertool:
                 spidertool.logger.printLog(content)
         except Exception as ex:
             print(ex)
+
+    '''
+        报告下载地址
+    '''
+    def reportDownloadUrl(url):
+        try:
+            if spidertool.logger != None:
+                spidertool.logger.reportDownloadUrl(url)
+        except Exception as ex:
+            print(ex)
+
+    '''
+        报告下载完成
+    '''
+    def reportFinish():
+        try:
+            if spidertool.logger != None:
+                spidertool.logger.reportFinish()
+        except Exception as ex:
+            print(ex)
+
 '''
     日志接口
 '''
@@ -142,4 +163,16 @@ class ILogDisplay:
         显示日志
     '''
     def printLog(self, content):
+        raise NotImplementedError
+
+    '''
+        报告下载地址
+    '''
+    def reportDownloadUrl(self, url):
+        raise NotImplementedError
+
+    '''
+        搜索完成
+    '''
+    def reportFinish(self):
         raise NotImplementedError

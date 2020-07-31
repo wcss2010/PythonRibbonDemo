@@ -126,6 +126,16 @@ class QTObjectInvokeArgs(QTInvokeArgs):
         self.content = tag
 
 '''
+    Invoke参数类(command,content,tag)
+'''
+class QTCommandInvokeArgs(QTInvokeArgs):
+    def __init__(self, cmd, content, tag):
+        super().__init__()
+        self.command = cmd
+        self.content = content
+        self.tag = tag
+
+'''
     QT的UI线程，用于模仿C#中的Form.Invoke的功能(用于跨线程操作UI内容)
 '''
 class QTUIInvokerThread(QThread):
@@ -188,7 +198,7 @@ class QTInvokeQueueWorkerWithProcess(threading.Thread):
                 if (task != None and self.windowObj != None):
                     self.windowObj.invokeUI(task)
                 #睡一会
-                time.sleep(0.2)
+                time.sleep(0.05)
             except Exception as ex:
                 print('QTUIInvokeMsgQueueWorker:' + str(ex))
         print('QTUIInvokeMsgQueueWorker-End!')
@@ -236,7 +246,7 @@ class QTInvokeQueueWorker(threading.Thread):
                 if (task != None and self.windowObj != None):
                     self.windowObj.invokeUI(task)
                 #睡一会
-                time.sleep(0.2)
+                time.sleep(0.05)
             except Exception as ex:
                 print('QTUIInvokeMsgQueueWorker:' + str(ex))
         print('QTUIInvokeMsgQueueWorker-End!')
