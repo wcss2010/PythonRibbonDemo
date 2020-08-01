@@ -31,8 +31,10 @@ class Ui_SplashWindow(object):
         font = QtGui.QFont()
         font.setPointSize(14)
         self.pbProgress.setFont(font)
-        self.pbProgress.setStyleSheet("color:rgb(255, 255, 255);")
+        self.pbProgress.setStyleSheet("color:rgb(255, 255, 255);\n"
+"border:1px solid rgb(255, 255, 255);")
         self.pbProgress.setProperty("value", 50)
+        self.pbProgress.setAlignment(QtCore.Qt.AlignCenter)
         self.pbProgress.setObjectName("pbProgress")
         SplashWindow.setCentralWidget(self.centralwidget)
 

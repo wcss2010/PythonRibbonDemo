@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/home/flywcs/myData/myCode/python-workspace/PythonQTApplicationTemplete/uiDefines/MainWindow.ui'
+# Form implementation generated from reading ui file '/home/flyss/myData/myCode/pythonWorkSpace/PythonQTApplicationTemplete/uiDefines/MainWindow.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.0
+# Created by: PyQt5 UI code generator 5.11.3
 #
 # WARNING! All changes made in this file will be lost!
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -17,23 +15,26 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.btnTestA = QtWidgets.QPushButton(self.centralwidget)
-        self.btnTestA.setGeometry(QtCore.QRect(90, 70, 121, 51))
+        self.btnTestA.setGeometry(QtCore.QRect(90, 40, 121, 51))
         self.btnTestA.setObjectName("btnTestA")
         self.txtContent = QtWidgets.QTextEdit(self.centralwidget)
-        self.txtContent.setGeometry(QtCore.QRect(250, 60, 321, 70))
+        self.txtContent.setGeometry(QtCore.QRect(250, 30, 321, 70))
         self.txtContent.setObjectName("txtContent")
         self.btnTestB = QtWidgets.QPushButton(self.centralwidget)
-        self.btnTestB.setGeometry(QtCore.QRect(590, 70, 121, 51))
+        self.btnTestB.setGeometry(QtCore.QRect(590, 40, 121, 51))
         self.btnTestB.setObjectName("btnTestB")
         self.btnTestC = QtWidgets.QPushButton(self.centralwidget)
-        self.btnTestC.setGeometry(QtCore.QRect(350, 150, 121, 51))
+        self.btnTestC.setGeometry(QtCore.QRect(350, 120, 121, 51))
         self.btnTestC.setObjectName("btnTestC")
+        self.btnTestD = QtWidgets.QPushButton(self.centralwidget)
+        self.btnTestD.setGeometry(QtCore.QRect(350, 190, 121, 51))
+        self.btnTestD.setObjectName("btnTestD")
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 839, 24))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 839, 36))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
 
@@ -46,3 +47,5 @@ class Ui_MainWindow(object):
         self.btnTestA.setText(_translate("MainWindow", "测试A"))
         self.btnTestB.setText(_translate("MainWindow", "测试B"))
         self.btnTestC.setText(_translate("MainWindow", "测试C"))
+        self.btnTestD.setText(_translate("MainWindow", "测试D"))
+

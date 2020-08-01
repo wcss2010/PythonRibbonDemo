@@ -205,7 +205,7 @@ class iotool(object):
         模仿Windows的ShellExecute的实现（可以打开http://或file://等）
     '''
     def shellExecute(url):
-        QtGui.QDesktopServices.openUrl(QtCore.QUrl(url, QtCore.QUrl.TolerantMode))
+        return QtGui.QDesktopServices.openUrl(QtCore.QUrl(url, QtCore.QUrl.TolerantMode))
 
     '''
       运行指令并等待返回结果（会阻塞直到完成）

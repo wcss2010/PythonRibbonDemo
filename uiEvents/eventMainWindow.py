@@ -31,6 +31,7 @@ class FMainWindow(IWindowImplM):
         self.uiObj.btnTestA.clicked.connect(self.btnTestAClicked)
         self.uiObj.btnTestB.clicked.connect(self.btnTestBClicked)
         self.uiObj.btnTestC.clicked.connect(self.btnTestCClicked)
+        self.uiObj.btnTestD.clicked.connect(self.btnTestDClicked)
 
     '''
        返回UI定义类的实例(例如uiDefines/Ui_MainWindow.py的实例,抽象函数)
@@ -55,13 +56,20 @@ class FMainWindow(IWindowImplM):
         按钮B
     '''
     def btnTestBClicked(self, e):
-        self.invokeUI(QTObjectInvokeArgs("bbbbbbbbbbbbbbb"))
+        if QMessageBox.question(self,"消息框标题","这是一条问答。",QMessageBox.Yes | QMessageBox.No) == QMessageBox.Yes:
+            self.invokeUI(QTObjectInvokeArgs("bbbbbbbbbbbbbbb"))
 
     '''
         按钮C
     '''
     def btnTestCClicked(self, e):
         self.msgWorker.addMsg(QTObjectInvokeArgs(datetime.datetime.now().__str__()))
+
+    '''
+        按钮D
+    '''
+    def btnTestDClicked(self, e):
+        iotool.shellExecute('file:///home/flyss/Downloads')
 
 '''
     SplashProcess为SplashWindow显示控制类
