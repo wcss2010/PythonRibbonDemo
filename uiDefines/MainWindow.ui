@@ -53,7 +53,7 @@
    <widget class="QPushButton" name="btnTestC">
     <property name="geometry">
      <rect>
-      <x>350</x>
+      <x>250</x>
       <y>120</y>
       <width>121</width>
       <height>51</height>
@@ -66,8 +66,8 @@
    <widget class="QPushButton" name="btnTestD">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>190</y>
+      <x>450</x>
+      <y>120</y>
       <width>121</width>
       <height>51</height>
      </rect>

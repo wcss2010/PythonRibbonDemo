@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/home/flyss/myData/myCode/pythonWorkSpace/PythonQTApplicationTemplete/uiDefines/MainWindow.ui'
+# Form implementation generated from reading ui file '/home/flyss/myData/myCode/pythonWorkSpace/QTApplicationTemplete/PythonQTApplicationTemplete/uiDefines/MainWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.11.3
 #
@@ -24,10 +24,10 @@ class Ui_MainWindow(object):
         self.btnTestB.setGeometry(QtCore.QRect(590, 40, 121, 51))
         self.btnTestB.setObjectName("btnTestB")
         self.btnTestC = QtWidgets.QPushButton(self.centralwidget)
-        self.btnTestC.setGeometry(QtCore.QRect(350, 120, 121, 51))
+        self.btnTestC.setGeometry(QtCore.QRect(250, 120, 121, 51))
         self.btnTestC.setObjectName("btnTestC")
         self.btnTestD = QtWidgets.QPushButton(self.centralwidget)
-        self.btnTestD.setGeometry(QtCore.QRect(350, 190, 121, 51))
+        self.btnTestD.setGeometry(QtCore.QRect(450, 120, 121, 51))
         self.btnTestD.setObjectName("btnTestD")
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
