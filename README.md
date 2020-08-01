@@ -3,7 +3,7 @@ proot.py 这个是Python程序的启动文件，一般不用修改,负责初始�
 programs.py 主要负责进行程序的初始化工作(创建QApplication对象，显示主窗体等)<br>
 uiDefines 窗体描述文件和描述类<br>
 uiEvents 窗体的基类和MainWindow的实现类<br>
-uiUtil一些常用函数,其中的cfenv是环境变量,负责初始化配置文件和目录结构<br>
+uiUtil一些常用函数,其中的cfenv是环境变量及配置文件类,负责初始化配置文件和目录结构<br>
 目录结构如下： <br>
 bin (用于存放主程序) <br>
 data (用于存放数据)<br>
