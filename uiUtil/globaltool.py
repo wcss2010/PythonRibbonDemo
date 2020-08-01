@@ -7,6 +7,7 @@ import base64
 import subprocess
 import shutil
 import io
+from PyQt5 import QtCore, QtGui
 
 '''
    用于模仿C#下的StringBuilder的功能
@@ -200,6 +201,12 @@ class codemaker(object):
    读写工具类
 '''
 class iotool(object):
+    '''
+        模仿Windows的ShellExecute的实现（可以打开http://或file://等）
+    '''
+    def shellExecute(url):
+        QtGui.QDesktopServices.openUrl(QtCore.QUrl(url, QtCore.QUrl.TolerantMode))
+
     '''
       运行指令并等待返回结果（会阻塞直到完成）
       输入参数：命令行字符串，返回内容编码

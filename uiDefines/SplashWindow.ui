@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">background: rgb(133, 133, 133)</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="lblContent">
@@ -32,8 +32,8 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">border:1px solid rgb(46, 52, 54);
-color:rgb(46, 52, 54);
+     <string notr="true">border:1px solid rgb(255, 255, 255);
+color:rgb(255, 255, 255);
 border-radius: 15px;</string>
     </property>
     <property name="text">
@@ -61,7 +61,7 @@ border-radius: 15px;</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color:rgb(46, 52, 54);</string>
+     <string notr="true">color:rgb(255, 255, 255);</string>
     </property>
     <property name="value">
      <number>50</number>
