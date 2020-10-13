@@ -15,7 +15,7 @@ from PyQt5 import QtCore, QtGui
 class StringBuffer(object):
     def __init__(self):
         super().__init__()
-        stringbuffer.enterFlag = '{<%enter%>}'
+        StringBuffer.enterFlag = '{<%enter%>}'
         self.clear()
 
     '''
@@ -29,28 +29,28 @@ class StringBuffer(object):
        添加文字
     '''
     def append(self,cnt):
-        self.__buf = self.__buf + (cnt.replace('\r','').replace('\n',stringbuffer.enterFlag))
+        self.__buf = self.__buf + (cnt.replace('\r','').replace('\n',StringBuffer.enterFlag))
         return self
 
     '''
        添加文字并添加换行符
     '''
     def appendLine(self,cnt):
-        self.append(cnt).append(stringbuffer.enterFlag)
+        self.append(cnt).append(StringBuffer.enterFlag)
         return self
 
     '''
        将文字放入缓冲区
     '''
     def fromString(self,cnt):
-        self.__buf = (cnt.replace('\r','').replace('\n',stringbuffer.enterFlag))
+        self.__buf = (cnt.replace('\r','').replace('\n',StringBuffer.enterFlag))
         return self
 
     '''
        输出文字
     '''
     def toString(self):
-        return self.__buf.replace(stringbuffer.enterFlag,'\n')
+        return self.__buf.replace(StringBuffer.enterFlag,'\n')
 
     '''
        解析Base64编码并放入缓冲区
@@ -167,7 +167,7 @@ class JsonDict(object):
 class CodeMaker(object):
     def __init__(self):
         self.__templete = ''
-        self.kvData = jsondict()
+        self.kvData = JsonDict()
 
     '''
         载入模板(从字符串)
@@ -195,7 +195,7 @@ class CodeMaker(object):
         for k,v in self.kvData.items():
             replaceKey = '$%' + k + '%$'
             tempStr = tempStr.replace(replaceKey,v)
-        return stringbuffer().fromString(tempStr)
+        return StringBuffer().fromString(tempStr)
 
 '''
    读写工具类
