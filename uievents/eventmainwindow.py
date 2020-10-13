@@ -3,9 +3,9 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtNetwork import *
-from uiEvents.AWindowBase import *
-from uiDefines.Ui_MainWindow import *
-from uiEvents.eventSplashWindow import *
+from uievents.awindowbase import *
+from uidefines.Ui_MainWindow import *
+from uievents.eventsplashwindow import *
 import os
 import sys
 import pathlib
@@ -69,7 +69,7 @@ class FMainWindow(IWindowImplM):
         按钮D
     '''
     def btnTestDClicked(self, e):
-        iotool.shellExecute('file:///home/flyss/Downloads')
+        IOTool.shellExecute('file:///home/flyss/Downloads')
 
 '''
     SplashProcess为SplashWindow显示控制类

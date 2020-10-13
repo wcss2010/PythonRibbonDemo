@@ -3,10 +3,10 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtNetwork import *
-from uiEvents.AWindowBase import *
-from uiDefines.Ui_SplashWindow import *
-from uiUtil.envs import *
-from uiUtil.globaltool import *
+from uievents.awindowbase import *
+from uidefines.Ui_SplashWindow import *
+from uiutil.envs import *
+from uiutil.globaltool import *
 import os
 import sys
 import pathlib

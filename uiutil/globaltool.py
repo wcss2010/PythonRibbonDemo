@@ -12,7 +12,7 @@ from PyQt5 import QtCore, QtGui
 '''
    用于模仿C#下的StringBuilder的功能
 '''
-class stringbuffer(object):
+class StringBuffer(object):
     def __init__(self):
         super().__init__()
         stringbuffer.enterFlag = '{<%enter%>}'
@@ -67,7 +67,7 @@ class stringbuffer(object):
 '''
     Json字典
 '''
-class jsondict(object):
+class JsonDict(object):
     def __init__(self):
         super().__init__()
         self.__buf = {}
@@ -100,25 +100,25 @@ class jsondict(object):
        从文件载入Json字典数据(从文件)
     '''
     def loadFile(self,file):
-        self.load(iotool.readAllText(file))
+        self.load(IOTool.readAllText(file))
 
     '''
        从文件载入Json字典数据(从ScriptDir中的文件)
     '''
     def loadFileFromScriptDir(self,fName):
-        self.loadFile(os.path.join(cfenv.scriptDir,fName))
+        self.loadFile(os.path.join(CFEnv.scriptDir,fName))
 
     '''
        保存Json数据到文件
     '''
     def saveFile(self,file):
-        iotool.writeAllText(file,json.dumps(self.__buf,indent=4))
+        IOTool.writeAllText(file,json.dumps(self.__buf,indent=4))
 
     '''
        保存Json数据到ScriptDir中的文件
     '''
     def saveFileToScriptDir(self,fName):
-        self.saveFile(os.path.join(cfenv.scriptDir,fName))
+        self.saveFile(os.path.join(CFEnv.scriptDir,fName))
 
     '''
        获得数据
@@ -164,7 +164,7 @@ class jsondict(object):
 '''
     代码生成（主要用于载入模板文件然后替换）
 '''
-class codemaker(object):
+class CodeMaker(object):
     def __init__(self):
         self.__templete = ''
         self.kvData = jsondict()
@@ -179,13 +179,13 @@ class codemaker(object):
         载入模板(从文件)
     '''
     def loadTempleteFile(self,file):
-        self.loadTemplete(iotool.readAllText(file))
+        self.loadTemplete(IOTool.readAllText(file))
 
     '''
         载入模板(从ScriptDir中的文件)
     '''
     def loadTempleteFileFromScriptDir(self,tName):
-        self.loadTempleteFile(os.path.join(cfenv.scriptDir,tName))
+        self.loadTempleteFile(os.path.join(CFEnv.scriptDir,tName))
 
     '''
         替换关键字
@@ -200,7 +200,7 @@ class codemaker(object):
 '''
    读写工具类
 '''
-class iotool(object):
+class IOTool(object):
     '''
         模仿Windows的ShellExecute的实现（可以打开http://或file://等）
     '''

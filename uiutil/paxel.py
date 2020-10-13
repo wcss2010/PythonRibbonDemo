@@ -8,7 +8,7 @@ import urllib
 '''
     多线程下载类
 '''
-class blockDownloader():  #下载文件
+class BlockDownloader():  #下载文件
     '''
         初始化
     '''

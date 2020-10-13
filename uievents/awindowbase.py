@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtNetwork import *
-from uiUtil.envs import *
+from uiutil.envs import *
 import os
 import sys
 import pathlib
@@ -91,7 +91,7 @@ class WindowBuilder:
     def buildWindow(windowObj, eventImpl):
         if eventImpl != None:
             uiDefine = eventImpl.getUIDefineObject()
-            if cfenv.appObj != None and uiDefine != None and eventImpl != None:
+            if CFEnv.appObj != None and uiDefine != None and eventImpl != None:
                 #设置描述类到窗体线程
                 if windowObj != None:
                     uiDefine.setupUi(windowObj)
@@ -99,17 +99,17 @@ class WindowBuilder:
                     uiDefine.setupUi(eventImpl)
                 #初始化窗体事件类
                 if windowObj != None:
-                    eventImpl.initWindow(cfenv.appObj,windowObj,uiDefine)
+                    eventImpl.initWindow(CFEnv.appObj, windowObj, uiDefine)
                     #返回对象
-                    return windowObj,uiDefine,eventImpl
+                    return windowObj, uiDefine, eventImpl
                 else:
-                    eventImpl.initWindow(cfenv.appObj,eventImpl,uiDefine)
+                    eventImpl.initWindow(CFEnv.appObj, eventImpl, uiDefine)
                     #返回对象
-                    return eventImpl,uiDefine,eventImpl
+                    return eventImpl, uiDefine, eventImpl
             else:
-                return None,None,None
+                return None, None, None
         else:
-                return None,None,None
+                return None, None, None
 
 '''
     Invoke参数类

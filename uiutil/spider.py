@@ -9,15 +9,15 @@ import scrapy
 from scrapy.crawler import CrawlerRunner
 from multiprocessing import Process, Queue
 from scrapy.utils.log import configure_logging
-from uiUtil.globaltool import *
+from uiutil.globaltool import *
 import json
 
 '''
     使用JS代码实现蜘蛛程序
 '''
-class jsSpider(scrapy.Spider):
+class JsSpider(scrapy.Spider):
     #Spider名称
-    name = 'jsSpider'
+    name = 'JsSpider'
 
     def __init__(self, name=None, **kwargs):
         super().__init__(name=name, **kwargs)
@@ -65,7 +65,7 @@ class jsSpider(scrapy.Spider):
 '''
     蜘蛛工具
 '''
-class spidertool:
+class SpiderTool:
     '''
         创建蜘蛛进程
     '''
@@ -80,8 +80,8 @@ class spidertool:
             except Exception as e:
                 q.put(e)
         #载入脚本
-        jsSpider.urlCode = iotool.readAllText(os.path.join(scriptPluginDir, 'url.js'))
-        jsSpider.resolveCode = iotool.readAllText(os.path.join(scriptPluginDir, 'spider.js'))
+        jsSpider.urlCode = IOTool.readAllText(os.path.join(scriptPluginDir, 'url.js'))
+        jsSpider.resolveCode = IOTool.readAllText(os.path.join(scriptPluginDir, 'spider.js'))
         #运行蜘蛛程序
         q = Queue()
         return Process(target=f, args=(q,))

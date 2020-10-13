@@ -6,10 +6,10 @@ import sys
 
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.uic.properties import QtGui
-from uiUtil.globaltool import *
-from uiUtil.envs import *
-from uiEvents.eventMainWindow import *
-from uiEvents.AWindowBase import *
+from uiutil.globaltool import *
+from uiutil.envs import *
+from uievents.eventmainwindow import *
+from uievents.awindowbase import *
 
 '''
     启动类
@@ -20,14 +20,14 @@ class Program:
     '''
     def main(args):
         #打印环境变量
-        print("Bin:" + cfenv.binDir)
-        print("Data:" + cfenv.dataDir)
-        print("Plugin:" + cfenv.pluginDir)
-        print("Script:" + cfenv.scriptDir)
-        print("ConfigFile:" + cfenv.configFilePath)
+        print("Bin:" + CFEnv.binDir)
+        print("Data:" + CFEnv.dataDir)
+        print("Plugin:" + CFEnv.pluginDir)
+        print("Script:" + CFEnv.scriptDir)
+        print("ConfigFile:" + CFEnv.configFilePath)
 
         #创建QT的Application对象,每一个pyqt程序中都需要有一个QApplication对象(不可删除!!!!!!!!!)
-        cfenv.appObj = QApplication(args)
+        CFEnv.appObj = QApplication(args)
 
         #创建窗体
         #mainWindow,uiDefine,eventObj = WindowBuilder.buildWindow(QMainWindow(), FMainWindow())
@@ -36,4 +36,4 @@ class Program:
         mainWindow.show()
 
         #进入程序的主循环，遇到退出情况，终止程序(不可删除!!!!!!!!!)
-        sys.exit(cfenv.appObj.exec_())
+        sys.exit(CFEnv.appObj.exec_())
