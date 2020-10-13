@@ -4,8 +4,10 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtNetwork import *
 from uievents.awindowbase import *
-from uidefines.Ui_MainWindow import *
+from uievents.fribbonwindow import *
 from uievents.eventsplashwindow import *
+from PyQt5.QtCore import Qt
+from uiutil.envs import *
 import os
 import sys
 import pathlib
@@ -14,82 +16,78 @@ import datetime
 '''
     这是MainWindow窗体的实现类
 '''
-#class FMainWindow(IWindowImpl):
-class FMainWindow(IWindowImplM):
+class FMainWindow(FRibbonWindowBase):
     '''
-       初始化所有数据(抽象函数)
+        获得窗体基本信息
     '''
-    def initUIAndData(self):
-        self.initEvents()
-        self.msgWorker = QTInvokeQueueWorker(self)
-        self.msgWorker.start()
+    def getWIndowInfo(self):
+        return 'xxx软件', 1280, 800, 'icon'
 
     '''
-        初始化事件
+        初始化Ribbon界面
     '''
-    def initEvents(self):
-        self.uiObj.btnTestA.clicked.connect(self.btnTestAClicked)
-        self.uiObj.btnTestB.clicked.connect(self.btnTestBClicked)
-        self.uiObj.btnTestC.clicked.connect(self.btnTestCClicked)
-        self.uiObj.btnTestD.clicked.connect(self.btnTestDClicked)
-
-    '''
-       返回UI定义类的实例(例如uiDefines/Ui_MainWindow.py的实例,抽象函数)
-    '''
-    def getUIDefineObject(self):
-        return Ui_MainWindow()
+    def initRibbonUI(self):
+        #-----初始化Tree
+        self.uiObj._tree_widget = QTreeWidget(self)
+        # self.uiObj._tree_widget.setHeaderHidden(True)
+        self.uiObj._tree_widget.setHeaderLabel('树标题')
+        self.uiObj._tree_widget.clear()
+        #设置根节点
+        root = QTreeWidgetItem(self.uiObj._tree_widget)
+        root.setText(0, '根节点')
+        #设置子节点1
+        child1 = QTreeWidgetItem()
+        child1.setText(0, '子节点1')
+        child1.setCheckState(0, Qt.Checked)
+        root.addChild(child1)
+        #设置子节点2
+        child2 = QTreeWidgetItem(root)
+        child2.setText(0, '子节点2')
+        #设置子节点3
+        child3 = QTreeWidgetItem(child2)
+        child3.setText(0, '子节点3')
+        #加载根节点的所有属性与子控件
+        self.uiObj._tree_widget.addTopLevelItem(root)
+        #为TreeWidget创建一个DockWidget容器
+        treeDockWidget = self.buildDockWidget(Qt.LeftDockWidgetArea, 'TreeDock', '目录树', self.uiObj._tree_widget)
+        #设置DockWidget的宽度
+        treeDockWidget.setFixedWidth(300)
+        #------初始化显示Label
+        self.uiObj._label_widget = QLabel('', self)
+        labelDockWidget = self.buildDockWidget(Qt.RightDockWidgetArea, 'ContentDock', '工作区', self.uiObj._label_widget)
+        labelDockWidget.setFixedWidth(1280 - 310)
+        #------初始化菜单
+        kvv = {}
+        kvv['新建'] = '文件-新建'
+        kvv['打开'] = '文件-打开'
+        kvv['关闭所有'] = '文件-关闭所有'
+        kvv['最近访问'] = '文件-最近访问'
+        kvv['查找'] = '文件-查找'
+        kvv['帮助'] = '文件-帮助'
+        self.buildSubMenu('文件', '', kvv)
 
     '''
         InvokeUI的实现(用于跨线程操作UI内容)
     '''
     def runUIImpl(self, uiArgs):
-        self.uiObj.txtContent.setText(uiArgs.content)
+        pass
 
     '''
-        按钮A
+        执行动作事件
     '''
-    def btnTestAClicked(self, e):
-        #显示SplashWindow窗体,SplashProcess为实现类
-        FSplashWindow.showWindow('aaaaa', SplashProcess())
-
-    '''
-        按钮B
-    '''
-    def btnTestBClicked(self, e):
-        if QMessageBox.question(self,"消息框标题","这是一条问答。",QMessageBox.Yes | QMessageBox.No) == QMessageBox.Yes:
-            self.invokeUI(QTObjectInvokeArgs("bbbbbbbbbbbbbbb"))
-
-    '''
-        按钮C
-    '''
-    def btnTestCClicked(self, e):
-        self.msgWorker.addMsg(QTObjectInvokeArgs(datetime.datetime.now().__str__()))
-
-    '''
-        按钮D
-    '''
-    def btnTestDClicked(self, e):
-        IOTool.shellExecute('file:///home/flyss/Downloads')
-
-'''
-    SplashProcess为SplashWindow显示控制类
-'''
-class SplashProcess(ISplashDoWork):
-    def process(self):
-        #显示进度为10,内容为111111111111111111111111
-        self.eventObj.msgWorker.addMsg(SplashInvokeArgs(10, '111111111111111111111111'))
-        time.sleep(1)
-        #显示进度为30,内容为222222222222222222222222
-        self.eventObj.msgWorker.addMsg(SplashInvokeArgs(30, '222222222222222222222222'))
-        time.sleep(1)
-        #显示进度为60,内容为333333333333333333333333
-        self.eventObj.msgWorker.addMsg(SplashInvokeArgs(60, '333333333333333333333333'))
-        time.sleep(1)
-        #显示进度为80,内容为444444444444444444444444
-        self.eventObj.msgWorker.addMsg(SplashInvokeArgs(80, '444444444444444444444444'))
-        time.sleep(1)
-        #显示进度为100,内容为555555555555555555555555
-        self.eventObj.msgWorker.addMsg(SplashInvokeArgs(100, '555555555555555555555555'))
-        time.sleep(1)
-        #关闭窗体
-        self.windowObj.close()
+    def processAction(self, panelName, actionName):
+        print(panelName + ',' + actionName)
+        #self.uiObj._label_widget.setText(panelName + ',' + actionName)
+        #拼装路径
+        imgPath = os.path.join(CFEnv.dataDir, 'bgImages', panelName, actionName + '.png')
+        print(imgPath)
+        if pathlib.Path(imgPath).exists():
+            #显示Gif的方法如下：
+            #self.gif = QMovie('qq.gif')
+            #self.labelWidget.setMovie(self.gif)
+            #self.gif.start()
+            #显示一般图片
+            pixmap = QPixmap(imgPath)
+            laSize = self.uiObj._label_widget.size()
+            scaredPixmap = pixmap.scaled(laSize, Qt.IgnoreAspectRatio)
+            self.uiObj._label_widget.setPixmap(scaredPixmap)
