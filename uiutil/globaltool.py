@@ -8,6 +8,7 @@ import subprocess
 import shutil
 import io
 from PyQt5 import QtCore, QtGui
+from uiutil.envs import CFEnv
 
 '''
    用于模仿C#下的StringBuilder的功能
