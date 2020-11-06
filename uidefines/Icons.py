@@ -35,7 +35,7 @@ class Icons(object):
             except KeyError:
                 print("icon " + name + " not found")
         else:
-            imgPath =  Icons.makeIconPath(os.path.join('icons', name.split('-')[0], name.split('-')[1] + '.ico'))
+            imgPath =  Icons.makeIconPath(os.path.join('icons', name.split('-')[0], name.split('-')[1] + '.png'))
             if pathlib.Path(imgPath).exists():
                 print(imgPath)
                 self.make_icon(name, imgPath)
